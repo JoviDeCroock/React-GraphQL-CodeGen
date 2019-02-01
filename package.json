@@ -1,0 +1,23 @@
+{
+  "name": "react-graphql-codegen",
+  "version": "1.0.0",
+  "description": "Opinionated code generator for TS Typings and a basic starter UI",
+  "main": "index.js",
+  "scripts": {
+    "test": "node src/parser/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoviDeCroock/React-GraphQL-CodeGen.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JoviDeCroock/React-GraphQL-CodeGen/issues"
+  },
+  "homepage": "https://github.com/JoviDeCroock/React-GraphQL-CodeGen#readme",
+  "dependencies": {
+    "graphql": "^14.1.1",
+    "node-fetch": "^2.3.0"
+  }
+}
