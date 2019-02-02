@@ -18,6 +18,7 @@
   "homepage": "https://github.com/JoviDeCroock/React-GraphQL-CodeGen#readme",
   "dependencies": {
     "graphql": "^14.1.1",
-    "node-fetch": "^2.3.0"
+    "node-fetch": "^2.3.0",
+    "recast": "^0.16.2"
   }
 }
