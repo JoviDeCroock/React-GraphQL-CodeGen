@@ -1,4 +1,3 @@
-const convertToAst = require('./utils/convertSchemaToAst');
 const getSchema = require('./utils/getSchema');
 const generateTSTypings = require('./typings/typescript');
 

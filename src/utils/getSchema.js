@@ -1,4 +1,7 @@
-const { introspectionQuery, buildClientSchema, printSchema } = require('graphql/utilities/introspectionQuery');
+const { introspectionQuery } = require('graphql/utilities/introspectionQuery')
+const { buildClientSchema } = require('graphql/utilities/buildClientSchema')
+const { printSchema } = require('graphql/utilities/schemaPrinter')
+const { parse } = require('graphql/language/parser')
 const fetch = require('node-fetch');
 const fs = require('fs');
 const util = require('util');
@@ -11,21 +14,20 @@ const defaultRequest = {
   body: JSON.stringify({ query: introspectionQuery }),
 }
 
-function handleResult(status) {
-  switch (status) {
-    case 404: throw new Error('The endpoint you have provided is invalid.'); break;
-    default: return;
-  }
-}
-
 async function getSchema() {
   const result = await fetch(ENDPOINT, defaultRequest);
-  handleResult(result.status);
+  switch (result.status) {
+    case 404: throw new Error('The endpoint you have provided is invalid.'); break;
+    default: break;
+  }
   const { data: schema, errors } = await result.json();
-  if (errors) { throw new Error('Something went wrong ', errors) }
-  const rawSchema = buildClientSchema(schema)
+  if (errors) {
+    throw new Error('Something went wrong ', errors);
+  }
+  const rawSchema = buildClientSchema(schema);
   const clientSchema = printSchema(rawSchema);
-  return { raw: rawSchema, pretty: clientSchema };
+  const parsedSchema = parse(clientSchema);
+  return parsedSchema;
 }
 
 module.exports = getSchema;
