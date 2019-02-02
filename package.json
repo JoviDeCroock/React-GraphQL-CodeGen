@@ -4,7 +4,7 @@
   "description": "Opinionated code generator for TS Typings and a basic starter UI",
   "main": "index.js",
   "scripts": {
-    "test": "node src/parser/index.js"
+    "test": "node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -17,8 +17,7 @@
   },
   "homepage": "https://github.com/JoviDeCroock/React-GraphQL-CodeGen#readme",
   "dependencies": {
-    "graphql": "^14.1.1",
-    "node-fetch": "^2.3.0",
-    "recast": "^0.16.2"
+    "graphql": "14.1.1",
+    "node-fetch": "2.3.0"
   }
 }
