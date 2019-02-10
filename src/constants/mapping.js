@@ -1,4 +1,4 @@
-import { Kind } from 'graphql/language';
+const { Kind } = require('graphql/language');
 
 const tsTypeMapping = {
   [Kind.STRING]: 'string',
