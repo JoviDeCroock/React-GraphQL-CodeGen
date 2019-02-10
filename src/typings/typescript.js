@@ -1,6 +1,8 @@
 const { NAME, OBJECT, NON_NULLABLE, LIST_TYPE, INPUT_TYPE } = require('../constants');
 const { tsTypeMapping } = require('../constants/mapping');
 
+const currentMapping = {};
+
 function generateTypes(fieldDefinitions) {
   let types = ``;
   fieldDefinitions.forEach((def) => {
@@ -10,13 +12,17 @@ function generateTypes(fieldDefinitions) {
       listType = def.type.type.kind === LIST_TYPE;
       if (listType) {
         types = `${types}\n  ${def.name.value}: Array<${tsTypeMapping[def.type.type.type.name.value] || def.type.type.type.name.value}>;`;
+        console.log(def.type.type.type.name.value)
       } else {
         types = `${types}\n  ${def.name.value}: ${tsTypeMapping[def.type.type.name.value] || def.type.type.name.value};`;
+        console.log(def.type.type.name.value)
       }
     } else if (listType) {
       types = `${types}\n  ${def.name.value}: Array<${tsTypeMapping[def.type.type.name.value] || def.type.type.name.value}>;`;
+      console.log(def.type.type.name.value)
     }else {
       types = `${types}\n  ${def.name.value}?: ${tsTypeMapping[def.type.name.value] || def.type.name.value};`;
+      console.log(def.type.name.value)
     }
   });
   return `${types}\n`;
@@ -27,11 +33,16 @@ function generateTSTypes(documentDefinitions) {
   documentDefinitions.forEach((def) => {
     switch(def.kind) {
       case OBJECT: {
-        types = `${types}type ${def.name.value} {${generateTypes(def.fields)}}\n\n`;
+        if (!currentMapping[def.name.value]) {
+          types = `${types}interface ${def.name.value} {${generateTypes(def.fields)}}\n\n`;
+          currentMapping[def.name.value] = true;
+        }
+        // TODO: else expand this.
         break;
       }
       case INPUT_TYPE: {
-        console.log(def);
+        // TODO: input types
+        // console.log(def);
       }
       default: console.error('unsupported type ', def.kind);
     }

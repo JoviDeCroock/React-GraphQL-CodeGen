@@ -1,11 +1,13 @@
 const { Kind } = require('graphql/language');
 
 const tsTypeMapping = {
-  [Kind.STRING]: 'string',
-  [Kind.INT]: 'number',
-  [Kind.BOOLEAN]: 'boolean',
-  [Kind.FLOAT]: 'number',
-  'ID': 'string'
+  [Kind.STRING]: 'String',
+  [Kind.INT]: 'Number',
+  [Kind.BOOLEAN]: 'Boolean',
+  [Kind.FLOAT]: 'Number',
+  Float: 'Number',
+  Int: 'Number',
+  'ID': 'String'
 }
 
 module.exports = { tsTypeMapping };
