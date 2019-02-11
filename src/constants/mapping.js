@@ -7,7 +7,8 @@ const tsTypeMapping = {
   [Kind.FLOAT]: 'Number',
   Float: 'Number',
   Int: 'Number',
-  'ID': 'String'
+  'ID': 'String',
+  'JSON': 'object',
 }
 
 module.exports = { tsTypeMapping };
