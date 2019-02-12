@@ -5,8 +5,7 @@ const { parse } = require('graphql/language/parser')
 const fetch = require('node-fetch');
 const fs = require('fs');
 const util = require('util');
-
-const ENDPOINT = 'http://localhost:3001/graphql';
+const { getSchemaUrl } = require('./readConfig');
 
 const defaultRequest = {
   method: 'POST',
@@ -15,6 +14,7 @@ const defaultRequest = {
 }
 
 async function getSchema() {
+  const ENDPOINT = await getSchemaUrl();
   const result = await fetch(ENDPOINT, defaultRequest);
   switch (result.status) {
     case 404: throw new Error('The endpoint you have provided is invalid.'); break;
